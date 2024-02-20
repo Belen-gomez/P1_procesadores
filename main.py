@@ -1,7 +1,7 @@
 import ply.lex as lex
 import sys
 """
-Errores: al poner un numero como 0b123, lo separa en un binario 0b1 y un entero 23
+Errores: anotación cientifica
 """
 reserved = ("TR", "FL", "NULL")
 
@@ -23,6 +23,27 @@ t_EQ = r'=='
 t_COMA = r','
 t_PUNTOS = r':'
 
+def t_HEX(token):
+    r"0[xX][0-9A-F]+"
+    token.value = int(token.value, 16)  # Convierte a entero
+    return token
+
+def t_OCT(token):
+    r"0[0-9]+"
+    token.value = int(token.value, 8)  # Convierte a entero
+    return token
+
+def t_BIN(token):
+    r'0[bB][01]+'
+    token.value = int(token.value, 2)  # Convierte a entero
+    return token
+
+
+def t_NCIENTIFICA(token):
+    r'\d+[eE]-*\d+'
+
+    return token
+
 def t_FLOAT(token):
     r'\-*\d*\.\d+'
     token.value = float(token.value)
@@ -32,27 +53,6 @@ def t_INT(token):
     r'\-*[1-9][0-9]*'
     token.value = int(token.value)
     return token
-
-def t_BIN(token):
-    r"0[bB][01]+"
-    token.value = int(token.value, 2)  # Convierte a entero
-    return token
-
-def t_OCT(token):
-    r"0[0-9]+"
-    token.value = int(token.value, 8)  # Convierte a entero
-    return token
-
-def t_HEX(token):
-    r"0[xX][0-9A-F]+"
-    token.value = int(token.value, 16)  # Convierte a entero
-    return token
-
-def t_NCIENTIFICA(token):
-    r'\d+[eE]-*\d+'
-
-    return token
-
 def t_CSINCOMILLAS(token):
     r'[A-Za-z_][A-Za-z_0-9]*'
     token.type = reserved_map.get(token.value.upper(), "CSINCOMILLAS")  # Check for reserved words
