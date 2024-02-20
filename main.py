@@ -1,6 +1,8 @@
 import ply.lex as lex
 import sys
-
+"""
+Errores: al poner un numero como 0b123, lo separa en un binario 0b1 y un entero 23
+"""
 reserved = ("TR", "FL", "NULL")
 
 tokens = ("FLOAT" , "INT", "NCIENTIFICA", "BIN", "OCT", "HEX", "CCOMILLAS", "CSINCOMILLAS", "LBRACKET",
@@ -33,17 +35,17 @@ def t_INT(token):
 
 def t_BIN(token):
     r"0[bB][01]+"
-    #token.value = bin(token.value)
+    token.value = int(token.value, 2)  # Convierte a entero
     return token
 
 def t_OCT(token):
     r"0[0-9]+"
-    #token.value = oct(token.value)
+    token.value = int(token.value, 8)  # Convierte a entero
     return token
 
 def t_HEX(token):
     r"0[xX][0-9A-F]+"
-    #token.value = hex(token.value)
+    token.value = int(token.value, 16)  # Convierte a entero
     return token
 
 def t_NCIENTIFICA(token):
@@ -56,7 +58,10 @@ def t_CSINCOMILLAS(token):
     token.type = reserved_map.get(token.value.upper(), "CSINCOMILLAS")  # Check for reserved words
     return token
 
-t_CCOMILLAS = r'"[^"\n]*"'
+def t_CCOMILLAS(token):
+    r'"[^"\n]*"'
+    token.value = token.value[1:-1]  # Quita las comillas dobles
+    return token
 
 t_ignore = ' ' #para ignorar cualquier valor que coincida con el espacio vacío y con la tabulación
 def t_newline(token):
