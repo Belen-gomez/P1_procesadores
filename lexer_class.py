@@ -8,7 +8,7 @@ class LexerClass:
     reserved = ("TR", "FL", "NULL")
 
     tokens = ("FLOAT" , "INT", "NCIENTIFICA", "BIN", "OCT", "HEX", "CCOMILLAS", "CSINCOMILLAS", "LBRACKET",
-        'RBRACKET', 'LT','LE', 'GT', 'GE','EQ', "COMA", "PUNTOS") + reserved
+        'RBRACKET', 'LCORCHETE', 'RCORCHETE', 'LT','LE', 'GT', 'GE','EQ', "COMA", "PUNTOS") + reserved
 
     def __init__(self):
         self.reserved_map = {}
@@ -19,6 +19,8 @@ class LexerClass:
 
     t_LBRACKET = r'\{'
     t_RBRACKET = r'\}'
+    t_LCORCHETE = r'\['
+    t_RCORCHETE = r'\]'
     t_LT = r'<'
     t_GT = r'>'
     t_LE = r'<='

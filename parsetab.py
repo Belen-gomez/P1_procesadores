@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BIN CCOMILLAS COMA CSINCOMILLAS EQ FL FLOAT GE GT HEX INT LBRACKET LE LT NCIENTIFICA NULL OCT PUNTOS RBRACKET TR\n        program :  ajson\n                | empty\n        \n        ajson :  LBRACKET object RBRACKET\n              | LBRACKET RBRACKET\n                \n        \n        object : pair COMA object\n               | pair COMA\n               | pair\n        \n        pair : clave PUNTOS value\n        \n        clave : CCOMILLAS\n              | CSINCOMILLAS\n        \n        value : num\n              | TR \n              | FL \n              | NULL \n              | CCOMILLAS \n              | ajson \n              | comparation\n        \n        num : FLOAT\n            | INT\n            | NCIENTIFICA\n            | BIN\n            | OCT\n            | HEX\n        \n        comparation : num LT num\n                    | num LE num\n                    | num GT num\n                    | num GE num\n                    | num EQ num\n        \n        empty : \n        '
+_lr_signature = 'BIN CCOMILLAS COMA CSINCOMILLAS EQ FL FLOAT GE GT HEX INT LBRACKET LCORCHETE LE LT NCIENTIFICA NULL OCT PUNTOS RBRACKET RCORCHETE TR\n        program :  ajson\n                | empty\n        \n        ajson :  LBRACKET object RBRACKET\n              | LBRACKET RBRACKET\n                \n        \n        object : pair COMA object\n               | pair COMA\n               | pair\n        \n        pair : clave PUNTOS value\n        \n        clave : CCOMILLAS\n              | CSINCOMILLAS\n        \n        value : num\n              | TR \n              | FL \n              | NULL \n              | CCOMILLAS \n              | ajson \n              | comparation\n              | array\n        \n        array : LCORCHETE array_values RCORCHETE\n              | LCORCHETE RCORCHETE\n        \n        array_values : ajson COMA array_values\n                     | ajson COMA\n                     | ajson\n        \n        num : FLOAT\n            | INT\n            | NCIENTIFICA\n            | BIN\n            | OCT\n            | HEX\n        \n        comparation : num LT num\n                    | num LE num\n                    | num GT num\n                    | num GE num\n                    | num EQ num\n        \n        empty : \n        '
     
-_lr_action_items = {'LBRACKET':([0,13,],[4,4,]),'$end':([0,1,2,3,6,11,],[-29,0,-1,-2,-4,-3,]),'RBRACKET':([4,5,6,7,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,34,35,36,37,38,],[6,11,-4,-7,-3,-6,-5,-8,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,]),'CCOMILLAS':([4,12,13,],[9,9,20,]),'CSINCOMILLAS':([4,12,],[10,10,]),'COMA':([6,7,11,15,16,17,18,19,20,21,22,23,24,25,26,27,28,34,35,36,37,38,],[-4,12,-3,-8,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,]),'PUNTOS':([8,9,10,],[13,-9,-10,]),'TR':([13,],[17,]),'FL':([13,],[18,]),'NULL':([13,],[19,]),'FLOAT':([13,29,30,31,32,33,],[23,23,23,23,23,23,]),'INT':([13,29,30,31,32,33,],[24,24,24,24,24,24,]),'NCIENTIFICA':([13,29,30,31,32,33,],[25,25,25,25,25,25,]),'BIN':([13,29,30,31,32,33,],[26,26,26,26,26,26,]),'OCT':([13,29,30,31,32,33,],[27,27,27,27,27,27,]),'HEX':([13,29,30,31,32,33,],[28,28,28,28,28,28,]),'LT':([16,23,24,25,26,27,28,],[29,-18,-19,-20,-21,-22,-23,]),'LE':([16,23,24,25,26,27,28,],[30,-18,-19,-20,-21,-22,-23,]),'GT':([16,23,24,25,26,27,28,],[31,-18,-19,-20,-21,-22,-23,]),'GE':([16,23,24,25,26,27,28,],[32,-18,-19,-20,-21,-22,-23,]),'EQ':([16,23,24,25,26,27,28,],[33,-18,-19,-20,-21,-22,-23,]),}
+_lr_action_items = {'LBRACKET':([0,13,30,45,],[4,4,4,4,]),'$end':([0,1,2,3,6,11,],[-35,0,-1,-2,-4,-3,]),'RBRACKET':([4,5,6,7,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,37,39,40,41,42,43,44,],[6,11,-4,-7,-3,-6,-5,-8,-11,-12,-13,-14,-15,-16,-17,-18,-24,-25,-26,-27,-28,-29,-20,-30,-31,-32,-33,-34,-19,]),'CCOMILLAS':([4,12,13,],[9,9,20,]),'CSINCOMILLAS':([4,12,],[10,10,]),'COMA':([6,7,11,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,37,38,39,40,41,42,43,44,],[-4,12,-3,-8,-11,-12,-13,-14,-15,-16,-17,-18,-24,-25,-26,-27,-28,-29,-20,45,-30,-31,-32,-33,-34,-19,]),'RCORCHETE':([6,11,30,36,38,45,46,],[-4,-3,37,44,-23,-22,-21,]),'PUNTOS':([8,9,10,],[13,-9,-10,]),'TR':([13,],[17,]),'FL':([13,],[18,]),'NULL':([13,],[19,]),'FLOAT':([13,31,32,33,34,35,],[24,24,24,24,24,24,]),'INT':([13,31,32,33,34,35,],[25,25,25,25,25,25,]),'NCIENTIFICA':([13,31,32,33,34,35,],[26,26,26,26,26,26,]),'BIN':([13,31,32,33,34,35,],[27,27,27,27,27,27,]),'OCT':([13,31,32,33,34,35,],[28,28,28,28,28,28,]),'HEX':([13,31,32,33,34,35,],[29,29,29,29,29,29,]),'LCORCHETE':([13,],[30,]),'LT':([16,24,25,26,27,28,29,],[31,-24,-25,-26,-27,-28,-29,]),'LE':([16,24,25,26,27,28,29,],[32,-24,-25,-26,-27,-28,-29,]),'GT':([16,24,25,26,27,28,29,],[33,-24,-25,-26,-27,-28,-29,]),'GE':([16,24,25,26,27,28,29,],[34,-24,-25,-26,-27,-28,-29,]),'EQ':([16,24,25,26,27,28,29,],[35,-24,-25,-26,-27,-28,-29,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'ajson':([0,13,],[2,21,]),'empty':([0,],[3,]),'object':([4,12,],[5,14,]),'pair':([4,12,],[7,7,]),'clave':([4,12,],[8,8,]),'value':([13,],[15,]),'num':([13,29,30,31,32,33,],[16,34,35,36,37,38,]),'comparation':([13,],[22,]),}
+_lr_goto_items = {'program':([0,],[1,]),'ajson':([0,13,30,45,],[2,21,38,38,]),'empty':([0,],[3,]),'object':([4,12,],[5,14,]),'pair':([4,12,],[7,7,]),'clave':([4,12,],[8,8,]),'value':([13,],[15,]),'num':([13,31,32,33,34,35,],[16,39,40,41,42,43,]),'comparation':([13,],[22,]),'array':([13,],[23,]),'array_values':([30,45,],[36,46,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,33 +27,39 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> ajson','program',1,'p_program','parser_class.py',14),
-  ('program -> empty','program',1,'p_program','parser_class.py',15),
-  ('ajson -> LBRACKET object RBRACKET','ajson',3,'p_ajson','parser_class.py',23),
-  ('ajson -> LBRACKET RBRACKET','ajson',2,'p_ajson','parser_class.py',24),
-  ('object -> pair COMA object','object',3,'p_object','parser_class.py',31),
-  ('object -> pair COMA','object',2,'p_object','parser_class.py',32),
-  ('object -> pair','object',1,'p_object','parser_class.py',33),
-  ('pair -> clave PUNTOS value','pair',3,'p_pair','parser_class.py',38),
-  ('clave -> CCOMILLAS','clave',1,'p_clave','parser_class.py',46),
-  ('clave -> CSINCOMILLAS','clave',1,'p_clave','parser_class.py',47),
-  ('value -> num','value',1,'p_value','parser_class.py',53),
-  ('value -> TR','value',1,'p_value','parser_class.py',54),
-  ('value -> FL','value',1,'p_value','parser_class.py',55),
-  ('value -> NULL','value',1,'p_value','parser_class.py',56),
-  ('value -> CCOMILLAS','value',1,'p_value','parser_class.py',57),
-  ('value -> ajson','value',1,'p_value','parser_class.py',58),
-  ('value -> comparation','value',1,'p_value','parser_class.py',59),
-  ('num -> FLOAT','num',1,'p_num','parser_class.py',66),
-  ('num -> INT','num',1,'p_num','parser_class.py',67),
-  ('num -> NCIENTIFICA','num',1,'p_num','parser_class.py',68),
-  ('num -> BIN','num',1,'p_num','parser_class.py',69),
-  ('num -> OCT','num',1,'p_num','parser_class.py',70),
-  ('num -> HEX','num',1,'p_num','parser_class.py',71),
-  ('comparation -> num LT num','comparation',3,'p_comparation','parser_class.py',78),
-  ('comparation -> num LE num','comparation',3,'p_comparation','parser_class.py',79),
-  ('comparation -> num GT num','comparation',3,'p_comparation','parser_class.py',80),
-  ('comparation -> num GE num','comparation',3,'p_comparation','parser_class.py',81),
-  ('comparation -> num EQ num','comparation',3,'p_comparation','parser_class.py',82),
-  ('empty -> <empty>','empty',0,'p_empty','parser_class.py',98),
+  ('program -> ajson','program',1,'p_program','parser_class.py',15),
+  ('program -> empty','program',1,'p_program','parser_class.py',16),
+  ('ajson -> LBRACKET object RBRACKET','ajson',3,'p_ajson','parser_class.py',24),
+  ('ajson -> LBRACKET RBRACKET','ajson',2,'p_ajson','parser_class.py',25),
+  ('object -> pair COMA object','object',3,'p_object','parser_class.py',34),
+  ('object -> pair COMA','object',2,'p_object','parser_class.py',35),
+  ('object -> pair','object',1,'p_object','parser_class.py',36),
+  ('pair -> clave PUNTOS value','pair',3,'p_pair','parser_class.py',45),
+  ('clave -> CCOMILLAS','clave',1,'p_clave','parser_class.py',53),
+  ('clave -> CSINCOMILLAS','clave',1,'p_clave','parser_class.py',54),
+  ('value -> num','value',1,'p_value','parser_class.py',60),
+  ('value -> TR','value',1,'p_value','parser_class.py',61),
+  ('value -> FL','value',1,'p_value','parser_class.py',62),
+  ('value -> NULL','value',1,'p_value','parser_class.py',63),
+  ('value -> CCOMILLAS','value',1,'p_value','parser_class.py',64),
+  ('value -> ajson','value',1,'p_value','parser_class.py',65),
+  ('value -> comparation','value',1,'p_value','parser_class.py',66),
+  ('value -> array','value',1,'p_value','parser_class.py',67),
+  ('array -> LCORCHETE array_values RCORCHETE','array',3,'p_array','parser_class.py',73),
+  ('array -> LCORCHETE RCORCHETE','array',2,'p_array','parser_class.py',74),
+  ('array_values -> ajson COMA array_values','array_values',3,'p_array_values','parser_class.py',83),
+  ('array_values -> ajson COMA','array_values',2,'p_array_values','parser_class.py',84),
+  ('array_values -> ajson','array_values',1,'p_array_values','parser_class.py',85),
+  ('num -> FLOAT','num',1,'p_num','parser_class.py',94),
+  ('num -> INT','num',1,'p_num','parser_class.py',95),
+  ('num -> NCIENTIFICA','num',1,'p_num','parser_class.py',96),
+  ('num -> BIN','num',1,'p_num','parser_class.py',97),
+  ('num -> OCT','num',1,'p_num','parser_class.py',98),
+  ('num -> HEX','num',1,'p_num','parser_class.py',99),
+  ('comparation -> num LT num','comparation',3,'p_comparation','parser_class.py',106),
+  ('comparation -> num LE num','comparation',3,'p_comparation','parser_class.py',107),
+  ('comparation -> num GT num','comparation',3,'p_comparation','parser_class.py',108),
+  ('comparation -> num GE num','comparation',3,'p_comparation','parser_class.py',109),
+  ('comparation -> num EQ num','comparation',3,'p_comparation','parser_class.py',110),
+  ('empty -> <empty>','empty',0,'p_empty','parser_class.py',126),
 ]

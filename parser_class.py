@@ -1,5 +1,6 @@
 import ply.yacc as yacc
 from lexer_class import LexerClass
+import sys
 
 class ParserClass:
     tokens = LexerClass.tokens
@@ -14,8 +15,8 @@ class ParserClass:
         program :  ajson
                 | empty
         """
-
-
+        p[0] = p[1]
+    
 
 
     def p_ajson(self, p):
@@ -25,7 +26,7 @@ class ParserClass:
                 
         """
         if len(p) == 4:
-            pass
+            p[0] = p[2]        
         
 
     def p_object(self, p):
@@ -34,13 +35,17 @@ class ParserClass:
                | pair COMA
                | pair
         """
+        if len(p) > 3:
+            p[0] = {**p[1], **p[3]}
+        else:
+            p[0] = p[1]
 
     def p_pair(self, p):
         """
         pair : clave PUNTOS value
         """
-        p[0] = p[1] + " : " + str(p[3])
-        print("{ " + p[0] + " }")
+        p[0] = {p[1]: p[3]}
+        
 
 
     def p_clave(self, p):
@@ -59,9 +64,30 @@ class ParserClass:
               | CCOMILLAS 
               | ajson 
               | comparation
+              | array
         """
         p[0] = p[1]
-      
+    
+    def p_array(self, p):
+        """
+        array : LCORCHETE array_values RCORCHETE
+              | LCORCHETE RCORCHETE
+        """
+        if len(p) == 4:
+            p[0] = p[2] 
+    
+    def p_array_values(self, p):
+        """
+        array_values : ajson COMA array_values
+                     | ajson COMA
+                     | ajson
+        """
+        if len(p) > 3:
+            p[0] = [p[1]] + p[3]
+        elif len(p) > 2:
+            p[0] = [p[1]]
+        else:
+            p[0] = [p[1]]
 
     def p_num(self, p):
         """
@@ -100,9 +126,28 @@ class ParserClass:
         empty : 
         """
         pass
+    
 
+    
     def test(self, data):
-        self.parser.parse(data)
+        result = self.parser.parse(data)
+        if not result:
+            print(">> FICHERO AJSON VACIO " + str(sys.argv[1]))
+        else:
+            print(">> FICHERO AJSON " + str(sys.argv[1]))
+            self.imprimir(result, prefix="")
+
+    def imprimir(self, data, prefix=""):
+        
+        for key, value in data.items():
+            new_key = f"{prefix}.{key}" if prefix else key
+            if isinstance(value, dict):
+                self.imprimir(value, new_key)
+            elif isinstance(value, list):
+                for i, item in enumerate(value):
+                    self.imprimir(item, f"{new_key}.{i}")
+            else:
+                print("{ " + new_key + " : " + str(value) + " }")
 
     def test_with_file(self, path):
         file = open(path)

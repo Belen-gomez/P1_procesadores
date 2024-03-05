@@ -1,0 +1,20 @@
+{
+  clave_vacia: {},
+  clave_numero: 10,
+  clave_cadena_caracteres: "string",
+  clave_booleano: TR, clave_valor_nulo: NULL,
+  clave_op_comp: 10 > 11,
+  binario: 0b10,
+  float: .12,
+  ncientifica : 10E-3,
+  clave_anidada:{
+  "clave con comillas":{
+  "clave con comillas": 10,
+  },
+  "clave con espacios": 10,
+  },
+  array" : [
+        { a: 1, b:2},
+        {a : 1}
+    ]
+}
