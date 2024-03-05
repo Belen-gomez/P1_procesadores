@@ -1,0 +1,537 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> ajson
+Rule 2     program -> empty
+Rule 3     ajson -> LBRACKET object RBRACKET
+Rule 4     ajson -> LBRACKET RBRACKET
+Rule 5     object -> pair COMA object
+Rule 6     object -> pair COMA
+Rule 7     object -> pair
+Rule 8     pair -> clave PUNTOS value
+Rule 9     clave -> CCOMILLAS
+Rule 10    clave -> CSINCOMILLAS
+Rule 11    value -> num
+Rule 12    value -> TR
+Rule 13    value -> FL
+Rule 14    value -> NULL
+Rule 15    value -> CCOMILLAS
+Rule 16    value -> ajson
+Rule 17    value -> comparation
+Rule 18    num -> FLOAT
+Rule 19    num -> INT
+Rule 20    num -> NCIENTIFICA
+Rule 21    num -> BIN
+Rule 22    num -> OCT
+Rule 23    num -> HEX
+Rule 24    comparation -> num LT num
+Rule 25    comparation -> num LE num
+Rule 26    comparation -> num GT num
+Rule 27    comparation -> num GE num
+Rule 28    comparation -> num EQ num
+Rule 29    empty -> <empty>
+
+Terminals, with rules where they appear
+
+BIN                  : 21
+CCOMILLAS            : 9 15
+COMA                 : 5 6
+CSINCOMILLAS         : 10
+EQ                   : 28
+FL                   : 13
+FLOAT                : 18
+GE                   : 27
+GT                   : 26
+HEX                  : 23
+INT                  : 19
+LBRACKET             : 3 4
+LE                   : 25
+LT                   : 24
+NCIENTIFICA          : 20
+NULL                 : 14
+OCT                  : 22
+PUNTOS               : 8
+RBRACKET             : 3 4
+TR                   : 12
+error                : 
+
+Nonterminals, with rules where they appear
+
+ajson                : 1 16
+clave                : 8
+comparation          : 17
+empty                : 2
+num                  : 11 24 24 25 25 26 26 27 27 28 28
+object               : 3 5
+pair                 : 5 6 7
+program              : 0
+value                : 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . ajson
+    (2) program -> . empty
+    (3) ajson -> . LBRACKET object RBRACKET
+    (4) ajson -> . LBRACKET RBRACKET
+    (29) empty -> .
+
+    LBRACKET        shift and go to state 4
+    $end            reduce using rule 29 (empty -> .)
+
+    program                        shift and go to state 1
+    ajson                          shift and go to state 2
+    empty                          shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> ajson .
+
+    $end            reduce using rule 1 (program -> ajson .)
+
+
+state 3
+
+    (2) program -> empty .
+
+    $end            reduce using rule 2 (program -> empty .)
+
+
+state 4
+
+    (3) ajson -> LBRACKET . object RBRACKET
+    (4) ajson -> LBRACKET . RBRACKET
+    (5) object -> . pair COMA object
+    (6) object -> . pair COMA
+    (7) object -> . pair
+    (8) pair -> . clave PUNTOS value
+    (9) clave -> . CCOMILLAS
+    (10) clave -> . CSINCOMILLAS
+
+    RBRACKET        shift and go to state 6
+    CCOMILLAS       shift and go to state 9
+    CSINCOMILLAS    shift and go to state 10
+
+    object                         shift and go to state 5
+    pair                           shift and go to state 7
+    clave                          shift and go to state 8
+
+state 5
+
+    (3) ajson -> LBRACKET object . RBRACKET
+
+    RBRACKET        shift and go to state 11
+
+
+state 6
+
+    (4) ajson -> LBRACKET RBRACKET .
+
+    $end            reduce using rule 4 (ajson -> LBRACKET RBRACKET .)
+    COMA            reduce using rule 4 (ajson -> LBRACKET RBRACKET .)
+    RBRACKET        reduce using rule 4 (ajson -> LBRACKET RBRACKET .)
+
+
+state 7
+
+    (5) object -> pair . COMA object
+    (6) object -> pair . COMA
+    (7) object -> pair .
+
+    COMA            shift and go to state 12
+    RBRACKET        reduce using rule 7 (object -> pair .)
+
+
+state 8
+
+    (8) pair -> clave . PUNTOS value
+
+    PUNTOS          shift and go to state 13
+
+
+state 9
+
+    (9) clave -> CCOMILLAS .
+
+    PUNTOS          reduce using rule 9 (clave -> CCOMILLAS .)
+
+
+state 10
+
+    (10) clave -> CSINCOMILLAS .
+
+    PUNTOS          reduce using rule 10 (clave -> CSINCOMILLAS .)
+
+
+state 11
+
+    (3) ajson -> LBRACKET object RBRACKET .
+
+    $end            reduce using rule 3 (ajson -> LBRACKET object RBRACKET .)
+    COMA            reduce using rule 3 (ajson -> LBRACKET object RBRACKET .)
+    RBRACKET        reduce using rule 3 (ajson -> LBRACKET object RBRACKET .)
+
+
+state 12
+
+    (5) object -> pair COMA . object
+    (6) object -> pair COMA .
+    (5) object -> . pair COMA object
+    (6) object -> . pair COMA
+    (7) object -> . pair
+    (8) pair -> . clave PUNTOS value
+    (9) clave -> . CCOMILLAS
+    (10) clave -> . CSINCOMILLAS
+
+    RBRACKET        reduce using rule 6 (object -> pair COMA .)
+    CCOMILLAS       shift and go to state 9
+    CSINCOMILLAS    shift and go to state 10
+
+    pair                           shift and go to state 7
+    object                         shift and go to state 14
+    clave                          shift and go to state 8
+
+state 13
+
+    (8) pair -> clave PUNTOS . value
+    (11) value -> . num
+    (12) value -> . TR
+    (13) value -> . FL
+    (14) value -> . NULL
+    (15) value -> . CCOMILLAS
+    (16) value -> . ajson
+    (17) value -> . comparation
+    (18) num -> . FLOAT
+    (19) num -> . INT
+    (20) num -> . NCIENTIFICA
+    (21) num -> . BIN
+    (22) num -> . OCT
+    (23) num -> . HEX
+    (3) ajson -> . LBRACKET object RBRACKET
+    (4) ajson -> . LBRACKET RBRACKET
+    (24) comparation -> . num LT num
+    (25) comparation -> . num LE num
+    (26) comparation -> . num GT num
+    (27) comparation -> . num GE num
+    (28) comparation -> . num EQ num
+
+    TR              shift and go to state 17
+    FL              shift and go to state 18
+    NULL            shift and go to state 19
+    CCOMILLAS       shift and go to state 20
+    FLOAT           shift and go to state 23
+    INT             shift and go to state 24
+    NCIENTIFICA     shift and go to state 25
+    BIN             shift and go to state 26
+    OCT             shift and go to state 27
+    HEX             shift and go to state 28
+    LBRACKET        shift and go to state 4
+
+    value                          shift and go to state 15
+    num                            shift and go to state 16
+    ajson                          shift and go to state 21
+    comparation                    shift and go to state 22
+
+state 14
+
+    (5) object -> pair COMA object .
+
+    RBRACKET        reduce using rule 5 (object -> pair COMA object .)
+
+
+state 15
+
+    (8) pair -> clave PUNTOS value .
+
+    COMA            reduce using rule 8 (pair -> clave PUNTOS value .)
+    RBRACKET        reduce using rule 8 (pair -> clave PUNTOS value .)
+
+
+state 16
+
+    (11) value -> num .
+    (24) comparation -> num . LT num
+    (25) comparation -> num . LE num
+    (26) comparation -> num . GT num
+    (27) comparation -> num . GE num
+    (28) comparation -> num . EQ num
+
+    COMA            reduce using rule 11 (value -> num .)
+    RBRACKET        reduce using rule 11 (value -> num .)
+    LT              shift and go to state 29
+    LE              shift and go to state 30
+    GT              shift and go to state 31
+    GE              shift and go to state 32
+    EQ              shift and go to state 33
+
+
+state 17
+
+    (12) value -> TR .
+
+    COMA            reduce using rule 12 (value -> TR .)
+    RBRACKET        reduce using rule 12 (value -> TR .)
+
+
+state 18
+
+    (13) value -> FL .
+
+    COMA            reduce using rule 13 (value -> FL .)
+    RBRACKET        reduce using rule 13 (value -> FL .)
+
+
+state 19
+
+    (14) value -> NULL .
+
+    COMA            reduce using rule 14 (value -> NULL .)
+    RBRACKET        reduce using rule 14 (value -> NULL .)
+
+
+state 20
+
+    (15) value -> CCOMILLAS .
+
+    COMA            reduce using rule 15 (value -> CCOMILLAS .)
+    RBRACKET        reduce using rule 15 (value -> CCOMILLAS .)
+
+
+state 21
+
+    (16) value -> ajson .
+
+    COMA            reduce using rule 16 (value -> ajson .)
+    RBRACKET        reduce using rule 16 (value -> ajson .)
+
+
+state 22
+
+    (17) value -> comparation .
+
+    COMA            reduce using rule 17 (value -> comparation .)
+    RBRACKET        reduce using rule 17 (value -> comparation .)
+
+
+state 23
+
+    (18) num -> FLOAT .
+
+    LT              reduce using rule 18 (num -> FLOAT .)
+    LE              reduce using rule 18 (num -> FLOAT .)
+    GT              reduce using rule 18 (num -> FLOAT .)
+    GE              reduce using rule 18 (num -> FLOAT .)
+    EQ              reduce using rule 18 (num -> FLOAT .)
+    COMA            reduce using rule 18 (num -> FLOAT .)
+    RBRACKET        reduce using rule 18 (num -> FLOAT .)
+
+
+state 24
+
+    (19) num -> INT .
+
+    LT              reduce using rule 19 (num -> INT .)
+    LE              reduce using rule 19 (num -> INT .)
+    GT              reduce using rule 19 (num -> INT .)
+    GE              reduce using rule 19 (num -> INT .)
+    EQ              reduce using rule 19 (num -> INT .)
+    COMA            reduce using rule 19 (num -> INT .)
+    RBRACKET        reduce using rule 19 (num -> INT .)
+
+
+state 25
+
+    (20) num -> NCIENTIFICA .
+
+    LT              reduce using rule 20 (num -> NCIENTIFICA .)
+    LE              reduce using rule 20 (num -> NCIENTIFICA .)
+    GT              reduce using rule 20 (num -> NCIENTIFICA .)
+    GE              reduce using rule 20 (num -> NCIENTIFICA .)
+    EQ              reduce using rule 20 (num -> NCIENTIFICA .)
+    COMA            reduce using rule 20 (num -> NCIENTIFICA .)
+    RBRACKET        reduce using rule 20 (num -> NCIENTIFICA .)
+
+
+state 26
+
+    (21) num -> BIN .
+
+    LT              reduce using rule 21 (num -> BIN .)
+    LE              reduce using rule 21 (num -> BIN .)
+    GT              reduce using rule 21 (num -> BIN .)
+    GE              reduce using rule 21 (num -> BIN .)
+    EQ              reduce using rule 21 (num -> BIN .)
+    COMA            reduce using rule 21 (num -> BIN .)
+    RBRACKET        reduce using rule 21 (num -> BIN .)
+
+
+state 27
+
+    (22) num -> OCT .
+
+    LT              reduce using rule 22 (num -> OCT .)
+    LE              reduce using rule 22 (num -> OCT .)
+    GT              reduce using rule 22 (num -> OCT .)
+    GE              reduce using rule 22 (num -> OCT .)
+    EQ              reduce using rule 22 (num -> OCT .)
+    COMA            reduce using rule 22 (num -> OCT .)
+    RBRACKET        reduce using rule 22 (num -> OCT .)
+
+
+state 28
+
+    (23) num -> HEX .
+
+    LT              reduce using rule 23 (num -> HEX .)
+    LE              reduce using rule 23 (num -> HEX .)
+    GT              reduce using rule 23 (num -> HEX .)
+    GE              reduce using rule 23 (num -> HEX .)
+    EQ              reduce using rule 23 (num -> HEX .)
+    COMA            reduce using rule 23 (num -> HEX .)
+    RBRACKET        reduce using rule 23 (num -> HEX .)
+
+
+state 29
+
+    (24) comparation -> num LT . num
+    (18) num -> . FLOAT
+    (19) num -> . INT
+    (20) num -> . NCIENTIFICA
+    (21) num -> . BIN
+    (22) num -> . OCT
+    (23) num -> . HEX
+
+    FLOAT           shift and go to state 23
+    INT             shift and go to state 24
+    NCIENTIFICA     shift and go to state 25
+    BIN             shift and go to state 26
+    OCT             shift and go to state 27
+    HEX             shift and go to state 28
+
+    num                            shift and go to state 34
+
+state 30
+
+    (25) comparation -> num LE . num
+    (18) num -> . FLOAT
+    (19) num -> . INT
+    (20) num -> . NCIENTIFICA
+    (21) num -> . BIN
+    (22) num -> . OCT
+    (23) num -> . HEX
+
+    FLOAT           shift and go to state 23
+    INT             shift and go to state 24
+    NCIENTIFICA     shift and go to state 25
+    BIN             shift and go to state 26
+    OCT             shift and go to state 27
+    HEX             shift and go to state 28
+
+    num                            shift and go to state 35
+
+state 31
+
+    (26) comparation -> num GT . num
+    (18) num -> . FLOAT
+    (19) num -> . INT
+    (20) num -> . NCIENTIFICA
+    (21) num -> . BIN
+    (22) num -> . OCT
+    (23) num -> . HEX
+
+    FLOAT           shift and go to state 23
+    INT             shift and go to state 24
+    NCIENTIFICA     shift and go to state 25
+    BIN             shift and go to state 26
+    OCT             shift and go to state 27
+    HEX             shift and go to state 28
+
+    num                            shift and go to state 36
+
+state 32
+
+    (27) comparation -> num GE . num
+    (18) num -> . FLOAT
+    (19) num -> . INT
+    (20) num -> . NCIENTIFICA
+    (21) num -> . BIN
+    (22) num -> . OCT
+    (23) num -> . HEX
+
+    FLOAT           shift and go to state 23
+    INT             shift and go to state 24
+    NCIENTIFICA     shift and go to state 25
+    BIN             shift and go to state 26
+    OCT             shift and go to state 27
+    HEX             shift and go to state 28
+
+    num                            shift and go to state 37
+
+state 33
+
+    (28) comparation -> num EQ . num
+    (18) num -> . FLOAT
+    (19) num -> . INT
+    (20) num -> . NCIENTIFICA
+    (21) num -> . BIN
+    (22) num -> . OCT
+    (23) num -> . HEX
+
+    FLOAT           shift and go to state 23
+    INT             shift and go to state 24
+    NCIENTIFICA     shift and go to state 25
+    BIN             shift and go to state 26
+    OCT             shift and go to state 27
+    HEX             shift and go to state 28
+
+    num                            shift and go to state 38
+
+state 34
+
+    (24) comparation -> num LT num .
+
+    COMA            reduce using rule 24 (comparation -> num LT num .)
+    RBRACKET        reduce using rule 24 (comparation -> num LT num .)
+
+
+state 35
+
+    (25) comparation -> num LE num .
+
+    COMA            reduce using rule 25 (comparation -> num LE num .)
+    RBRACKET        reduce using rule 25 (comparation -> num LE num .)
+
+
+state 36
+
+    (26) comparation -> num GT num .
+
+    COMA            reduce using rule 26 (comparation -> num GT num .)
+    RBRACKET        reduce using rule 26 (comparation -> num GT num .)
+
+
+state 37
+
+    (27) comparation -> num GE num .
+
+    COMA            reduce using rule 27 (comparation -> num GE num .)
+    RBRACKET        reduce using rule 27 (comparation -> num GE num .)
+
+
+state 38
+
+    (28) comparation -> num EQ num .
+
+    COMA            reduce using rule 28 (comparation -> num EQ num .)
+    RBRACKET        reduce using rule 28 (comparation -> num EQ num .)
+

@@ -44,6 +44,7 @@ class LexerClass:
 
     def t_NCIENTIFICA(self, t):
         r'\d+[eE]-*\d+'
+        t.value = float(t.value)
         return t
 
     def t_FLOAT(self, t):

@@ -6,7 +6,8 @@
   clave_op_comp: 10 > 11,
   binario: 0b10,
   float: .12,
+  ncientifica : 10E-3,
   clave_anidada:{
-  "clave con comillas":"",
+  "clave con comillas":""
   }
 }
