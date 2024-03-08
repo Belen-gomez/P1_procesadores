@@ -127,7 +127,10 @@ class ParserClass:
         """
         pass
     
-
+    def p_error(self, p):
+        print("[parser] Parser error: "+ p + " Valor: " + p.value)
+        
+        
     
     def test(self, data):
         result = self.parser.parse(data)

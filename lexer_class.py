@@ -75,7 +75,7 @@ class LexerClass:
         t.lexer.lineno += t.value.count('\n') #aumenta la posicion del lexer en tantas unidades como saltos haya
 
     def t_error(self, t):
-        print("[Ex1][Lexer] Illegal character", t)
+        print("[Lexer] Illegal character", t)
         t.lexer.skip(1) #se salta ese caracter
 
     def test(self, data):
