@@ -1,6 +1,6 @@
 import sys
 from lexer_class import LexerClass
-from parser_class import ParserClass
+from ajson_parser import ParserClass
 
 #l = LexerClass()
 #l.test_with_file(sys.argv[1])
