@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-from lexer_class import LexerClass
+from ajson_lexer import LexerClass
 import sys
 
 class ParserClass:
@@ -26,7 +26,7 @@ class ParserClass:
                 
         """
         if len(p) == 4:
-            p[0] = p[2]        
+            p[0] = p[2]
         
 
     def p_object(self, p):
@@ -66,7 +66,14 @@ class ParserClass:
               | comparation
               | array
         """
-        p[0] = p[1]
+        if p[1] == "TR" or p[1] == "tr":
+            p[0] = True
+        elif p[1] == "FL" or p[1] == "fl":
+            p[0] = False
+        elif p[1] == "NULL" or p[1] == "null":
+            p[0] = None
+        else:
+            p[0] = p[1]
     
     def p_array(self, p):
         """
@@ -128,7 +135,7 @@ class ParserClass:
         pass
     
     def p_error(self, p):
-        print("[parser] Parser error: "+ p + " Valor: " + p.value)
+        print("[parser] Parser error: "+ str(p) + " Valor: " + str(p.value)) # + p.value)
         
         
     
