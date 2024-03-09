@@ -3,11 +3,14 @@ from ajson_lexer import LexerClass
 import sys
 
 class ParserClass:
-    tokens = LexerClass.tokens
+    """
+    Clase que define el parser para el lenguaje ajson
+    """
+    tokens = LexerClass.tokens #tokens que se pueden usar
 
     def __init__(self):
         self.parser = yacc.yacc(module=self)
-        self.lexer = LexerClass().lexer
+        self.lexer = LexerClass().lexer #se crea el lexer
 
     
     def p_program(self, p):
@@ -153,10 +156,9 @@ class ParserClass:
             print(">> OBJETO AJSON VACIO " + str(sys.argv[1]))
         else:
             print(">> FICHERO AJSON " + str(sys.argv[1]))
-            self.imprimir(result, prefix="")
+            self.imprimir(result, "")
 
-    def imprimir(self, data, prefix=""):
-        
+    def imprimir(self, data,prefix):
         for key, value in data.items():
             new_key = f"{prefix}.{key}" if prefix else key
             if isinstance(value, dict):

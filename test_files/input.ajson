@@ -11,7 +11,7 @@
   "clave con comillas":{
   clave_hexadecimal:  0XFED123,
   },
-  "clave con espacios": 10,
+  "clave con espacios": "",
   },
   array : [
         { a: 1, b:2},
