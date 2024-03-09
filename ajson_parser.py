@@ -27,6 +27,8 @@ class ParserClass:
         """
         if len(p) == 4:
             p[0] = p[2]
+        else:
+            p[0] = "Null"
         
 
     def p_object(self, p):
@@ -135,7 +137,11 @@ class ParserClass:
         pass
     
     def p_error(self, p):
-        print("[parser] Parser error: "+ str(p) + " Valor: " + str(p.value)) # + p.value)
+        if not p:
+            print("[parser] Parser error. Valor: " + str(p))
+        else:
+            print("[parser] Parser error. Valor: " + str(p.value))
+        sys.exit(1)
         
         
     
@@ -143,6 +149,8 @@ class ParserClass:
         result = self.parser.parse(data)
         if not result:
             print(">> FICHERO AJSON VACIO " + str(sys.argv[1]))
+        elif result == "Null":
+            print(">> OBJETO AJSON VACIO " + str(sys.argv[1]))
         else:
             print(">> FICHERO AJSON " + str(sys.argv[1]))
             self.imprimir(result, prefix="")

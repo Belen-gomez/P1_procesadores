@@ -9,7 +9,7 @@
   ncientifica : 10E-3,
   clave_anidada:{
   "clave con comillas":{
-  clave_sin_comillas: "hola",
+  clave_hexadecimal:  0XFED123,
   },
   "clave con espacios": 10,
   },
