@@ -3,19 +3,20 @@ import sys
 
 class LexerClass:
     """
-    Errores: anotación cientifica
+    Clase que define el lexer para el lenguaje ajson
     """
-    reserved = ("TR", "FL", "NULL")
+    reserved = ("TR", "FL", "NULL") #palabras reservadas
 
     tokens = ("FLOAT" , "INT", "NCIENTIFICA", "BIN", "OCT", "HEX", "CCOMILLAS", "CSINCOMILLAS", "LBRACKET",
-        'RBRACKET', 'LCORCHETE', 'RCORCHETE', 'LT','LE', 'GT', 'GE','EQ', "COMA", "PUNTOS") + reserved
+        'RBRACKET', 'LCORCHETE', 'RCORCHETE', 'LT','LE', 'GT', 'GE','EQ', "COMA", "PUNTOS") + reserved  #tokens que se pueden usar
 
     def __init__(self):
         self.reserved_map = {}
-        for r in self.reserved:
+        for r in self.reserved: #se añaden las palabras reservadas al mapa, tanto en mayusculas como en minusculas
             self.reserved_map[r.upper()] = r
             self.reserved_map[r.lower()] = r
         self.lexer = lex.lex(module=self)
+
 
     t_LBRACKET = r'\{'
     t_RBRACKET = r'\}'
@@ -46,7 +47,7 @@ class LexerClass:
 
     def t_NCIENTIFICA(self, t):
         r'\d+[eE]-*\d+'
-        t.value = float(t.value)
+        t.value = float(t.value) # Convierte a float
         return t
 
     def t_FLOAT(self, t):
@@ -61,7 +62,7 @@ class LexerClass:
 
     def t_CSINCOMILLAS(self, t):
         r'[A-Za-z_][A-Za-z_0-9]*'
-        t.type = self.reserved_map.get(t.value.upper(), "CSINCOMILLAS")  # Check for reserved words
+        t.type = self.reserved_map.get(t.value.upper(), "CSINCOMILLAS")  # Busca en el mapa de palabras reservadas
         return t
 
     def t_CCOMILLAS(self, t):
